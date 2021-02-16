@@ -28,21 +28,21 @@ class BinaryTree:
                 ans.append("#")
                 
         encode(root)
-        return ans
+        return " ".join(ans)
     
     def deserialize(self, arr):
-        def decode(vals):
+        def decode(arr):
             #Iterator object will return data, one element at a time.
-            val = next(vals)
+            val = next(arr)
             if val == "#":
                 return None
             else:
                 root = TreeNode(int(val))
-                root.left = self.deserialize(vals)
-                root.right = self.deserialize(vals)
+                root.left = decode(arr)
+                root.right = decode(arr)
                 return root
         #Iterators are objects that can be iterated upon.
-        return decode(iter(arr))
+        return decode(iter(arr.split()))
 
 obj = BinaryTree()
 root = obj.treeCreate([1,2,3,4,7,8,9])
